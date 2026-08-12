@@ -32,7 +32,7 @@ const DAGEN = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"] as const;
 function week1of2(items: string[]): Dag[] {
   return DAGEN.map((dag, i) => ({
     dag,
-    hapjes: [{ item: items[i], blokjes: 1 as const }],
+    hapjes: [{ item: items[i] ?? "", blokjes: 1 as const }],
   }));
 }
 
