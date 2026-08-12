@@ -44,20 +44,56 @@ function HapRegel({ hap, index, tweeHapjes }: { hap: Hap; index: number; tweeHap
   );
 }
 
-export function DagKaart({ dag }: { dag: Dag }) {
+export function DagKaart({
+  dag,
+  id,
+  checked,
+  onToggle,
+}: {
+  dag: Dag;
+  id: string;
+  checked: boolean;
+  onToggle: (id: string) => void;
+}) {
   const tweeHapjes = dag.hapjes.length > 1;
   const heeftAllergeen = dag.hapjes.some((h) => h.allergen);
 
   return (
     <div
-      className={`avoid-break flex flex-col rounded-xl border bg-card p-3 ${
-        heeftAllergeen ? "border-brand/40 shadow-[0_1px_0_0_var(--brand)]" : "border-border"
+      className={`avoid-break relative flex flex-col rounded-xl border p-3 transition-colors ${
+        checked ? "border-brand bg-sun/40" : heeftAllergeen ? "border-brand/40 bg-card" : "border-border bg-card"
       }`}
     >
-      <span className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">
-        {dag.dag}
-      </span>
-      <div className="flex flex-1 flex-col gap-2.5">
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand">
+          {dag.dag}
+        </span>
+        <button
+          type="button"
+          role="checkbox"
+          aria-checked={checked}
+          aria-label={`${dag.dag} afvinken`}
+          onClick={() => onToggle(id)}
+          className={`print-vinkvak flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-colors ${
+            checked
+              ? "border-brand bg-brand text-brand-foreground"
+              : "border-brand/40 bg-background hover:border-brand"
+          }`}
+        >
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
+            <path
+              d="M3 8.5 L6.5 12 L13 4.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={checked ? 1 : 0}
+            />
+          </svg>
+        </button>
+      </div>
+      <div className={`flex flex-1 flex-col gap-2.5 ${checked ? "opacity-70" : ""}`}>
         {dag.hapjes.map((hap, i) => (
           <HapRegel key={i} hap={hap} index={i} tweeHapjes={tweeHapjes} />
         ))}
