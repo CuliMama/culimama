@@ -2,6 +2,15 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Le Petit Cochon";
+  src: url("/fonts/Lepetitcochon-Regular.otf") format("opentype"),
+    url("/fonts/Lepetitcochon-Regular.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -173,8 +182,8 @@
 }
 
 @page {
-  size: A2 portrait;
-  margin: 12mm;
+  size: A3 portrait;
+  margin: 10mm;
 }
 
 @media print {
@@ -183,6 +192,7 @@
     background: #fffaf2 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    font-size: 10.5px;
   }
 
   .no-print {
@@ -199,5 +209,11 @@
     break-inside: avoid;
     page-break-inside: avoid;
   }
-}
 
+  /* Vinkvakjes blijven leeg en goed zichtbaar op papier */
+  .print-vinkvak {
+    border-color: #ff4001 !important;
+    background: #ffffff !important;
+    color: #ff4001 !important;
+  }
+}
