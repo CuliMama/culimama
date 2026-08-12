@@ -60,9 +60,8 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
         >
           {allergeen.allergenAmount}
         </span>
-      ) : (
-        
-      )}
+      ) : null}
+
     </div>
   );
 }
