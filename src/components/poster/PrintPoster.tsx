@@ -25,20 +25,20 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
   const allergeen = dag.hapjes.find((h) => h.allergen);
 
   return (
-    <div className="flex flex-col justify-between h-full rounded-[6px] border border-brand/25 bg-white px-[6px] py-[5px]">
+    <div className="flex h-full flex-col rounded-[6px] border border-brand/25 bg-white px-[6px] py-[5px]">
       <div className="flex items-center justify-between">
         <span className="text-[9px] font-bold uppercase tracking-[0.1em] text-brand">
           {dag.dag}
         </span>
         <span className="block h-[13px] w-[13px] rounded-[3px] border-[1.5px] border-brand/60 bg-white" />
       </div>
-      <div className="mt-[4px] space-y-[3px]">
+      <div className="mt-[4px] space-y-[4px]">
         {dag.hapjes.map((hap, i) => (
           <div key={i} className="flex items-start justify-between gap-[3px]">
             <span className="text-[10px] font-medium leading-[1.2] text-foreground">
               {twee ? (
-                <span className="text-[7px] uppercase tracking-[0.08em] text-muted-foreground">
-                  {i === 0 ? "F " : "G "}
+                <span className="mr-[2px] text-[7px] font-bold uppercase tracking-[0.08em] text-brand/70">
+                  {i === 0 ? "fruit" : "groente"}
                 </span>
               ) : null}
               {hap.item}
@@ -143,7 +143,7 @@ export function PrintPoster() {
             <span className="inline-flex items-center gap-[3px]">
               <span className="h-[12px] w-[12px] rounded-[3px] border-[1.5px] border-brand/60" /> afvinken
             </span>
-            <span>F = fruit · G = groente · * vers prakken</span>
+            <span>* vers prakken</span>
             <span className="ml-auto font-medium lowercase tracking-[0.15em] text-brand">
               culi mama · @culi.mama
             </span>
