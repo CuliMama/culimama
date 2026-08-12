@@ -13,7 +13,7 @@ function Blokjes({ aantal }: { aantal: 1 | 2 }) {
       {Array.from({ length: aantal }).map((_, i) => (
         <span
           key={i}
-          className="block h-[5px] w-[5px] rounded-[1.5px] border border-sky-foreground/50 bg-sky"
+          className="block h-[7px] w-[7px] rounded-[2px] border border-sky-foreground/50 bg-sky"
         />
       ))}
     </span>
@@ -25,19 +25,19 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
   const allergeen = dag.hapjes.find((h) => h.allergen);
 
   return (
-    <div className="flex flex-col justify-between rounded-[4px] border border-brand/25 bg-white px-[4px] py-[3px]">
+    <div className="flex flex-col justify-between h-full rounded-[6px] border border-brand/25 bg-white px-[6px] py-[5px]">
       <div className="flex items-center justify-between">
-        <span className="text-[6px] font-bold uppercase tracking-[0.1em] text-brand">
+        <span className="text-[9px] font-bold uppercase tracking-[0.1em] text-brand">
           {dag.dag}
         </span>
-        <span className="block h-[8px] w-[8px] rounded-[2px] border-[1.2px] border-brand/60 bg-white" />
+        <span className="block h-[13px] w-[13px] rounded-[3px] border-[1.5px] border-brand/60 bg-white" />
       </div>
-      <div className="mt-[2px] space-y-[1px]">
+      <div className="mt-[4px] space-y-[3px]">
         {dag.hapjes.map((hap, i) => (
           <div key={i} className="flex items-start justify-between gap-[3px]">
-            <span className="text-[7px] font-medium leading-[1.15] text-foreground">
+            <span className="text-[10px] font-medium leading-[1.2] text-foreground">
               {twee ? (
-                <span className="text-[5.5px] uppercase tracking-[0.08em] text-muted-foreground">
+                <span className="text-[7px] uppercase tracking-[0.08em] text-muted-foreground">
                   {i === 0 ? "F " : "G "}
                 </span>
               ) : null}
@@ -52,7 +52,7 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
       </div>
       {allergeen ? (
         <span
-          className={`mt-[2px] block rounded-[6px] px-[3px] py-[1px] text-center text-[5.5px] font-bold leading-tight ${
+          className={`mt-auto inline-block self-start rounded-[8px] px-[5px] py-[1.5px] text-[7.5px] font-bold leading-tight ${
             allergeen.allergen === "pinda"
               ? "bg-brand text-brand-foreground"
               : "bg-sun text-sun-foreground"
@@ -61,7 +61,7 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
           {allergeen.allergenAmount}
         </span>
       ) : (
-        <span className="mt-[2px] block h-[8px]" />
+        
       )}
     </div>
   );
@@ -69,15 +69,15 @@ function DagCel({ week, dag }: { week: Week; dag: Week["dagen"][number] }) {
 
 function WeekRij({ week }: { week: Week }) {
   return (
-    <div className="flex items-stretch gap-[4px]">
-      <div className="flex w-[70px] shrink-0 flex-col justify-center rounded-[5px] bg-brand px-[6px] py-[4px] text-brand-foreground">
-        <span className="font-display text-[11px] leading-none">Week {week.nummer}</span>
-        <span className="mt-[2px] text-[6px] font-semibold uppercase leading-tight tracking-[0.08em]">
+    <div className="flex h-full items-stretch gap-[5px]">
+      <div className="flex w-[92px] shrink-0 flex-col justify-center rounded-[7px] bg-brand px-[8px] py-[6px] text-brand-foreground">
+        <span className="font-display text-[16px] leading-none">Week {week.nummer}</span>
+        <span className="mt-[3px] text-[8px] font-semibold uppercase leading-tight tracking-[0.06em]">
           {week.thema}
         </span>
-        <span className="mt-[1px] text-[5.5px] leading-tight opacity-85">{week.ondertitel}</span>
+        <span className="mt-[2px] text-[7.5px] leading-tight opacity-85">{week.ondertitel}</span>
       </div>
-      <div className="grid flex-1 grid-cols-7 gap-[4px]">
+      <div className="grid flex-1 grid-cols-7 gap-[5px]">
         {week.dagen.map((dag) => (
           <DagCel key={dag.dag} week={week} dag={dag} />
         ))}
@@ -95,15 +95,15 @@ export function PrintPoster() {
             <img
               src="/favicon.svg"
               alt="Culi Mama"
-              className="h-[34px] w-[34px] rounded-full bg-brand-foreground p-[3px]"
+              className="h-[46px] w-[46px] rounded-full bg-brand-foreground p-[3px]"
             />
             <div>
-              <p className="font-display text-[8px] lowercase tracking-[0.3em]">culi mama</p>
-              <h1 className="font-display text-[24px] leading-[1]">
+              <p className="font-display text-[11px] lowercase tracking-[0.3em]">culi mama</p>
+              <h1 className="font-display text-[34px] leading-[1]">
                 Eerste hapjes — <span className="text-sun">8 weken</span>
               </h1>
             </div>
-            <p className="ml-auto text-right text-[7px] font-semibold leading-tight">
+            <p className="ml-auto text-right text-[10px] font-semibold leading-tight">
               4–6 maanden · vink elke dag af
               <br />
               <span className="opacity-80">1 ijsblokje ≈ 15 g</span>
@@ -117,7 +117,7 @@ export function PrintPoster() {
           </svg>
         </header>
 
-        <div className="mt-[6px] flex flex-1 flex-col justify-between gap-[5px]">
+        <div className="mt-[8px] flex flex-1 flex-col gap-[7px]">
           {weken.map((week) => (
             <div key={week.nummer} className="flex-1">
               <WeekRij week={week} />
@@ -127,8 +127,8 @@ export function PrintPoster() {
 
         <div className="mt-[6px] overflow-hidden rounded-[6px] border border-brand/30 bg-sun/50">
           <GolfLijn kleur="var(--brand)" />
-          <div className="flex flex-wrap items-center gap-x-[10px] gap-y-[2px] px-[8px] py-[4px] text-[6.5px]">
-            <span className="font-display text-[9px] leading-none text-brand">Legenda</span>
+          <div className="flex flex-wrap items-center gap-x-[14px] gap-y-[3px] px-[10px] py-[6px] text-[9px]">
+            <span className="font-display text-[13px] leading-none text-brand">Legenda</span>
             <span className="inline-flex items-center gap-[3px]">
               <Blokjes aantal={1} /> 1 ijsblokje (±15 g)
             </span>
@@ -136,13 +136,13 @@ export function PrintPoster() {
               <Blokjes aantal={2} /> 2 ijsblokjes
             </span>
             <span className="inline-flex items-center gap-[3px]">
-              <span className="h-[6px] w-[6px] rounded-full bg-brand" /> pinda
+              <span className="h-[9px] w-[9px] rounded-full bg-brand" /> pinda
             </span>
             <span className="inline-flex items-center gap-[3px]">
-              <span className="h-[6px] w-[6px] rounded-full bg-sun" /> ei
+              <span className="h-[9px] w-[9px] rounded-full bg-sun" /> ei
             </span>
             <span className="inline-flex items-center gap-[3px]">
-              <span className="h-[8px] w-[8px] rounded-[2px] border-[1.2px] border-brand/60" /> afvinken
+              <span className="h-[12px] w-[12px] rounded-[3px] border-[1.5px] border-brand/60" /> afvinken
             </span>
             <span>F = fruit · G = groente · * vers prakken</span>
             <span className="ml-auto font-medium lowercase tracking-[0.15em] text-brand">
