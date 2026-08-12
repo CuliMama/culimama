@@ -183,7 +183,28 @@
 
 @page {
   size: A3 portrait;
-  margin: 10mm;
+  margin: 8mm;
+}
+
+/* Compacte 1-pagina A3 printposter */
+.print-sheet {
+  width: 281mm;
+  height: 404mm;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: var(--font-sans);
+}
+
+.print-only {
+  display: none;
+}
+
+/* Schermvoorbeeld van de printposter */
+.print-preview {
+  display: block;
+  width: 281mm;
+  height: 404mm;
+  transform-origin: top left;
 }
 
 @media print {
@@ -192,28 +213,25 @@
     background: #fffaf2 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-size: 10.5px;
   }
 
-  .no-print {
+  .no-print,
+  .screen-only {
     display: none !important;
   }
 
-  .poster {
-    width: 100% !important;
-    max-width: none !important;
-    padding: 0 !important;
+  .print-only {
+    display: block !important;
+  }
+
+  .print-preview {
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
   }
 
   .avoid-break {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-
-  /* Vinkvakjes blijven leeg en goed zichtbaar op papier */
-  .print-vinkvak {
-    border-color: #ff4001 !important;
-    background: #ffffff !important;
-    color: #ff4001 !important;
   }
 }

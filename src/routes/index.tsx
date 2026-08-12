@@ -3,6 +3,7 @@ import { useState } from "react";
 import { basisregels, opbouw, weken } from "@/data/schema";
 import { WeekBlok } from "@/components/poster/WeekBlok";
 import { Golf, GolfLijn } from "@/components/poster/Golf";
+import { PrintPoster } from "@/components/poster/PrintPoster";
 import { useAfvinken } from "@/hooks/useAfvinken";
 
 export const Route = createFileRoute("/")({
@@ -51,11 +52,9 @@ function OpbouwKaart({ data, kleur }: { data: typeof opbouw.pinda; kleur: "brand
   );
 }
 
-type Formaat = "A3" | "A2" | "A4";
-
 function Index() {
   const { done, toggle, reset } = useAfvinken();
-  const [formaat, setFormaat] = useState<Formaat>("A3");
+  const [voorbeeld, setVoorbeeld] = useState(false);
 
   const totaal = weken.reduce((n, w) => n + w.dagen.length, 0);
   const af = weken.reduce(
@@ -66,28 +65,17 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background px-4 py-8 print:p-0">
-      <style>{`@page { size: ${formaat} portrait; margin: 10mm; }`}</style>
+      <div className="print-only">
+        <PrintPoster />
+      </div>
 
-      <div className="poster mx-auto w-full max-w-[1400px]">
+      <div className="poster screen-only mx-auto w-full max-w-[1400px]">
         <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-md text-sm text-muted-foreground">
-            Vink hieronder digitaal af wat je baby al gehad heeft — of print de poster en zet er
-            met de hand vinkjes in.
+            Vink hieronder digitaal af wat je baby al gehad heeft — je voortgang blijft bewaard.
+            De printposter is één compacte A3 met alleen de schema's.
           </p>
           <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
-              {(["A4", "A3", "A2"] as Formaat[]).map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFormaat(f)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    formaat === f ? "bg-brand text-brand-foreground" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
             <button
               onClick={reset}
               className="rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
@@ -95,13 +83,35 @@ function Index() {
               Vinkjes wissen
             </button>
             <button
+              onClick={() => setVoorbeeld((v) => !v)}
+              className="rounded-full border border-brand/40 px-4 py-2.5 text-sm font-semibold text-brand transition-colors hover:bg-brand/5"
+            >
+              {voorbeeld ? "Verberg printvoorbeeld" : "Bekijk printposter (A3)"}
+            </button>
+            <button
               onClick={() => window.print()}
               className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-foreground transition-opacity hover:opacity-90"
             >
-              Print poster ({formaat})
+              Print A3-poster
             </button>
           </div>
         </div>
+
+        {voorbeeld ? (
+          <div className="no-print mb-6 overflow-hidden rounded-3xl border border-border bg-muted/40 p-4">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Printvoorbeeld · A3 staand · 1 pagina
+            </p>
+            <div className="mx-auto" style={{ width: "281mm", maxWidth: "100%" }}>
+              <div
+                className="origin-top-left"
+                style={{ transform: "scale(0.62)", width: "281mm", height: "251mm" }}
+              >
+                <PrintPoster />
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         <header className="avoid-break mb-5 overflow-hidden rounded-3xl bg-brand text-brand-foreground">
           <div className="flex flex-wrap items-end justify-between gap-4 px-6 pb-2 pt-7">
