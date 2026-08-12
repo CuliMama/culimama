@@ -156,5 +156,48 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
 }
+
+@layer base {
+  :root {
+    --card: #ffffff;
+    --card-foreground: #221a15;
+    --muted: #f6efe4;
+    --muted-foreground: #6d5f54;
+    --border: #ebdfcd;
+    --primary: #ff4001;
+    --primary-foreground: #fffaf2;
+  }
+}
+
+@page {
+  size: A2 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fffaf2 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .poster {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
