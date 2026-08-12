@@ -1,5 +1,5 @@
 import type { Week } from "@/data/schema";
-import { weekItemIds } from "@/data/schema";
+import { dagAfgevinkt } from "@/data/schema";
 import { DagKaart } from "./DagKaart";
 import { GolfLijn } from "./Golf";
 
@@ -12,9 +12,8 @@ export function WeekBlok({
   done?: Record<string, boolean>;
   onToggle: (id: string) => void;
 }) {
-  const ids = weekItemIds(week);
-  const totaal = ids.length;
-  const af = ids.filter((id) => done[id]).length;
+  const totaal = week.dagen.length;
+  const af = week.dagen.filter((d) => dagAfgevinkt(week.nummer, d, done)).length;
 
   return (
     <section className="avoid-break overflow-hidden rounded-2xl border border-border bg-muted/40">

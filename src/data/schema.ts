@@ -555,6 +555,16 @@ export function weekItemIds(week: Week): string[] {
   return week.dagen.flatMap((dag) => dagItemIds(week.nummer, dag));
 }
 
+/** Een dag telt als afgevinkt zodra alle hapjes én allergenen van die dag zijn afgevinkt. */
+export function dagAfgevinkt(
+  weekNummer: number,
+  dag: Dag,
+  done: Record<string, boolean>,
+): boolean {
+  const ids = dagItemIds(weekNummer, dag);
+  return ids.length > 0 && ids.every((id) => done[id]);
+}
+
 export const basisregels: string[] = [
   "Baby hoeft het hapje niet op te eten — het zijn oefenhapjes, geen maaltijden.",
   "Een smaak mag tot 15 keer nodig hebben. Niet 15 dagen achter elkaar: blijf gewoon variëren.",

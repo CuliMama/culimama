@@ -1,5 +1,5 @@
 import type { Dag, Hap } from "@/data/schema";
-import { allergeenId, dagItemIds, hapId } from "@/data/schema";
+import { allergeenId, dagAfgevinkt, hapId } from "@/data/schema";
 
 function Blokjes({ aantal }: { aantal: 1 | 2 }) {
   return (
@@ -122,8 +122,7 @@ export function DagKaart({
   const tweeHapjes = dag.hapjes.length > 1;
   const heeftAllergeen = dag.hapjes.some((h) => h.allergen);
 
-  const alleIds = dagItemIds(weekNummer, dag);
-  const alleAfgevinkt = alleIds.length > 0 && alleIds.every((id) => done[id]);
+  const alleAfgevinkt = dagAfgevinkt(weekNummer, dag, done);
 
   return (
     <div
