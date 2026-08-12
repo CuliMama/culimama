@@ -1,4 +1,5 @@
 import type { Week } from "@/data/schema";
+import { weekItemIds } from "@/data/schema";
 import { DagKaart } from "./DagKaart";
 import { GolfLijn } from "./Golf";
 
@@ -11,8 +12,9 @@ export function WeekBlok({
   done?: Record<string, boolean>;
   onToggle: (id: string) => void;
 }) {
-  const totaal = week.dagen.length;
-  const af = week.dagen.filter((d) => done[`w${week.nummer}-${d.dag}`]).length;
+  const ids = weekItemIds(week);
+  const totaal = ids.length;
+  const af = ids.filter((id) => done[id]).length;
 
   return (
     <section className="avoid-break overflow-hidden rounded-2xl border border-border bg-muted/40">
@@ -42,18 +44,15 @@ export function WeekBlok({
         </header>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-          {week.dagen.map((dag) => {
-            const id = `w${week.nummer}-${dag.dag}`;
-            return (
-              <DagKaart
-                key={dag.dag}
-                dag={dag}
-                id={id}
-                checked={Boolean(done[id])}
-                onToggle={onToggle}
-              />
-            );
-          })}
+          {week.dagen.map((dag) => (
+            <DagKaart
+              key={dag.dag}
+              dag={dag}
+              weekNummer={week.nummer}
+              done={done}
+              onToggle={onToggle}
+            />
+          ))}
         </div>
 
         {week.notes.length > 0 ? (

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { basisregels, opbouw, weken } from "@/data/schema";
+import { basisregels, opbouw, weekItemIds, weken } from "@/data/schema";
 import { WeekBlok } from "@/components/poster/WeekBlok";
 import { Golf, GolfLijn } from "@/components/poster/Golf";
 import { PrintPoster } from "@/components/poster/PrintPoster";
@@ -56,12 +56,10 @@ function Index() {
   const { done, toggle, reset } = useAfvinken();
   const [voorbeeld, setVoorbeeld] = useState(false);
 
-  const totaal = weken.reduce((n, w) => n + w.dagen.length, 0);
-  const af = weken.reduce(
-    (n, w) => n + w.dagen.filter((d) => done[`w${w.nummer}-${d.dag}`]).length,
-    0,
-  );
-  const percentage = Math.round((af / totaal) * 100);
+  const alleIds = weken.flatMap((w) => weekItemIds(w));
+  const totaal = alleIds.length;
+  const af = alleIds.filter((id) => done[id]).length;
+  const percentage = totaal > 0 ? Math.round((af / totaal) * 100) : 0;
 
   return (
     <main className="min-h-screen bg-background px-4 py-8 print:p-0">
@@ -149,7 +147,7 @@ function Index() {
         <div className="no-print avoid-break mb-5 flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4">
           <div className="min-w-[180px]">
             <p className="font-display text-lg font-semibold leading-none">
-              {af} van {totaal} dagen afgevinkt
+              {af} van {totaal} onderdelen afgevinkt
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               Je voortgang wordt bewaard op dit apparaat.

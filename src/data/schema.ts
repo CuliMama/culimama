@@ -209,12 +209,7 @@ export const weken: Week[] = [
       {
         dag: "Di",
         hapjes: [
-          {
-            item: "Avocado",
-            blokjes: 1,
-            allergen: "pinda",
-            allergenAmount: "1 tl pindakaas",
-          },
+          { item: "Avocado", blokjes: 1 },
           {
             item: "Zoete aardappel",
             blokjes: 1,
@@ -246,7 +241,12 @@ export const weken: Week[] = [
       {
         dag: "Vr",
         hapjes: [
-          { item: "Avocado", blokjes: 1 },
+          {
+            item: "Avocado",
+            blokjes: 1,
+            allergen: "pinda",
+            allergenAmount: "1 tl pindakaas",
+          },
           { item: "Zoete aardappel", blokjes: 1 },
         ],
       },
@@ -286,24 +286,12 @@ export const weken: Week[] = [
       {
         dag: "Ma",
         hapjes: [
-          {
-            item: "Appel",
-            blokjes: 1,
-            allergen: "pinda",
-            allergenAmount: "1 tl pindakaas",
-          },
+          { item: "Appel", blokjes: 1 },
           { item: "Venkel", blokjes: 2, allergen: "ei", allergenAmount: "¼ ei" },
         ],
       },
       {
         dag: "Di",
-        hapjes: [
-          { item: "Banaan", blokjes: 1, fresh: true },
-          { item: "Doperwten", blokjes: 2 },
-        ],
-      },
-      {
-        dag: "Wo",
         hapjes: [
           {
             item: "Banaan",
@@ -312,13 +300,25 @@ export const weken: Week[] = [
             allergen: "pinda",
             allergenAmount: "1 tl pindakaas",
           },
+          { item: "Doperwten", blokjes: 2 },
+        ],
+      },
+      {
+        dag: "Wo",
+        hapjes: [
+          { item: "Banaan", blokjes: 1, fresh: true },
           { item: "Wortel", blokjes: 2, allergen: "ei", allergenAmount: "¼ ei" },
         ],
       },
       {
         dag: "Do",
         hapjes: [
-          { item: "Avocado", blokjes: 1 },
+          {
+            item: "Avocado",
+            blokjes: 1,
+            allergen: "pinda",
+            allergenAmount: "1 tl pindakaas",
+          },
           { item: "Venkel", blokjes: 2 },
         ],
       },
@@ -451,12 +451,7 @@ export const weken: Week[] = [
       {
         dag: "Ma",
         hapjes: [
-          {
-            item: "Peer",
-            blokjes: 2,
-            allergen: "pinda",
-            allergenAmount: "1 tl pindakaas",
-          },
+          { item: "Peer", blokjes: 2 },
           {
             item: "Bloemkool + doperwten + wortel",
             blokjes: 2,
@@ -499,7 +494,13 @@ export const weken: Week[] = [
       {
         dag: "Vr",
         hapjes: [
-          { item: "Banaan", blokjes: 2, fresh: true },
+          {
+            item: "Banaan",
+            blokjes: 2,
+            fresh: true,
+            allergen: "pinda",
+            allergenAmount: "1 tl pindakaas",
+          },
           { item: "Zoete aardappel + courgette", blokjes: 2 },
         ],
       },
@@ -529,6 +530,30 @@ export const weken: Week[] = [
     ],
   },
 ];
+
+/** Id van het vinkvakje voor een los hapje (fruit/groente/hapje) binnen een dag. */
+export function hapId(weekNummer: number, dagNaam: string, hapIndex: number): string {
+  return `w${weekNummer}-${dagNaam}-h${hapIndex}`;
+}
+
+/** Id van het vinkvakje voor het allergeen (pinda/ei) binnen een hapje, indien aanwezig. */
+export function allergeenId(weekNummer: number, dagNaam: string, hapIndex: number): string {
+  return `${hapId(weekNummer, dagNaam, hapIndex)}-a`;
+}
+
+/** Alle af te vinken id's (hapjes + allergenen) voor één dag. */
+export function dagItemIds(weekNummer: number, dag: Dag): string[] {
+  return dag.hapjes.flatMap((hap, i) =>
+    hap.allergen
+      ? [hapId(weekNummer, dag.dag, i), allergeenId(weekNummer, dag.dag, i)]
+      : [hapId(weekNummer, dag.dag, i)],
+  );
+}
+
+/** Alle af te vinken id's voor een hele week. */
+export function weekItemIds(week: Week): string[] {
+  return week.dagen.flatMap((dag) => dagItemIds(week.nummer, dag));
+}
 
 export const basisregels: string[] = [
   "Baby hoeft het hapje niet op te eten — het zijn oefenhapjes, geen maaltijden.",
