@@ -4,11 +4,11 @@ import { GolfLijn } from "./Golf";
 
 export function WeekBlok({
   week,
-  done,
+  done = {},
   onToggle,
 }: {
   week: Week;
-  done: Record<string, boolean>;
+  done?: Record<string, boolean>;
   onToggle: (id: string) => void;
 }) {
   const totaal = week.dagen.length;
