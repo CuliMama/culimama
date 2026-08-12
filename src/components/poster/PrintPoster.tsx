@@ -108,7 +108,7 @@ export function PrintPoster() {
               <span className="opacity-80">1 ijsblokje ≈ 15 g</span>
             </p>
           </div>
-          <svg viewBox="0 0 1200 30" preserveAspectRatio="none" className="mt-[6px] block h-[10px] w-full" aria-hidden="true">
+          <svg viewBox="0 0 1200 30" preserveAspectRatio="none" className="mt-[8px] block h-[18px] w-full" aria-hidden="true">
             <path
               d="M0,15 C100,30 200,0 300,10 C400,22 500,28 600,17 C700,7 800,0 900,9 C1000,20 1100,26 1200,14 L1200,30 L0,30 Z"
               fill="var(--background)"
