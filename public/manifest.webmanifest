@@ -1,0 +1,21 @@
+{
+  "name": "Culi Mama — Eerste hapjes",
+  "short_name": "Culi Mama",
+  "description": "8-weken mealplanner voor de eerste hapjes: dag voor dag welk hapje, hoeveel en welke allergenen.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff4001",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
