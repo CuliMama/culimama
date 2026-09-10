@@ -1,7 +1,7 @@
 import type { Dag, Hap } from "@/data/schema";
 import { allergeenId, dagAfgevinkt, hapId } from "@/data/schema";
 
-function Blokjes({ aantal }: { aantal: 1 | 2 }) {
+function Blokjes({ aantal }: { aantal: 1 | 2 | 3 }) {
   return (
     <span className="inline-flex items-center gap-[2px] align-middle" aria-label={`${aantal} ijsblokje${aantal > 1 ? "s" : ""}`}>
       {Array.from({ length: aantal }).map((_, i) => (
