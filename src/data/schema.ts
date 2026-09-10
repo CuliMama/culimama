@@ -4,7 +4,7 @@ export type Hap = {
   /** Hoofdomschrijving van het hapje, bv. "Bloemkool + venkel" */
   item: string;
   /** Portie in ijsblokjes */
-  blokjes: 1 | 2;
+  blokjes: 1 | 2 | 3;
   /** Allergeen dat deze dag wordt aangeboden */
   allergen?: Allergen;
   /** Hoeveelheid allergeen, bv. "½ tl pindakaas" */
@@ -445,8 +445,8 @@ export const weken: Week[] = [
   {
     nummer: 8,
     thema: "Mengen van 2-3 smaken + extra fruitvariatie",
-    ondertitel: "2 hapjes per dag, beide 2 blokjes",
-    labels: ["Fruit: + kiwi & mango", "Groente: oplopend naar 3 smaken"],
+    ondertitel: "2 hapjes per dag, groente groeit mee naar 3 blokjes",
+    labels: ["Fruit: 2 blokjes", "Groente: oplopend naar 3 blokjes/smaken"],
     dagen: [
       {
         dag: "Ma",
@@ -454,7 +454,7 @@ export const weken: Week[] = [
           { item: "Peer", blokjes: 2 },
           {
             item: "Bloemkool + doperwten + wortel",
-            blokjes: 2,
+            blokjes: 3,
             allergen: "ei",
             allergenAmount: "¼ ei",
           },
@@ -464,7 +464,7 @@ export const weken: Week[] = [
         dag: "Di",
         hapjes: [
           { item: "Kiwi", blokjes: 2, fresh: true },
-          { item: "Zoete aardappel + snijbonen + broccoli", blokjes: 2 },
+          { item: "Zoete aardappel + snijbonen + broccoli", blokjes: 3 },
         ],
       },
       {
@@ -476,7 +476,7 @@ export const weken: Week[] = [
             allergen: "pinda",
             allergenAmount: "1 tl pindakaas",
           },
-          { item: "Courgette + pastinaak + wortel", blokjes: 2 },
+          { item: "Courgette + pastinaak + wortel", blokjes: 3 },
         ],
       },
       {
@@ -485,7 +485,7 @@ export const weken: Week[] = [
           { item: "Mango", blokjes: 2 },
           {
             item: "Venkel + doperwten + broccoli",
-            blokjes: 2,
+            blokjes: 3,
             allergen: "ei",
             allergenAmount: "¼ ei",
           },
@@ -513,14 +513,14 @@ export const weken: Week[] = [
             allergen: "pinda",
             allergenAmount: "1 tl pindakaas",
           },
-          { item: "Bloemkool + venkel + wortel", blokjes: 2 },
+          { item: "Bloemkool + venkel + wortel", blokjes: 3 },
         ],
       },
       {
         dag: "Zo",
         hapjes: [
           { item: "Kiwi", blokjes: 2, fresh: true },
-          { item: "Snijbonen + broccoli + courgette", blokjes: 2 },
+          { item: "Snijbonen + broccoli + courgette", blokjes: 3 },
         ],
       },
     ],
