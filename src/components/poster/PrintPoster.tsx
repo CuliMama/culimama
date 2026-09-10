@@ -7,7 +7,7 @@ import { GolfLijn } from "./Golf";
  * Alleen de schema's + vinkvakjes, geen basisregels.
  */
 
-function Blokjes({ aantal }: { aantal: 1 | 2 }) {
+function Blokjes({ aantal }: { aantal: 1 | 2 | 3 }) {
   return (
     <span className="inline-flex gap-[1px]">
       {Array.from({ length: aantal }).map((_, i) => (
@@ -133,6 +133,9 @@ export function PrintPoster() {
             </span>
             <span className="inline-flex items-center gap-[3px]">
               <Blokjes aantal={2} /> 2 ijsblokjes
+            </span>
+            <span className="inline-flex items-center gap-[3px]">
+              <Blokjes aantal={3} /> 3 ijsblokjes
             </span>
             <span className="inline-flex items-center gap-[3px]">
               <span className="h-[9px] w-[9px] rounded-full bg-brand" /> pinda
