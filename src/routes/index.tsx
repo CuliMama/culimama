@@ -194,6 +194,14 @@ function Index() {
                 2 ijsblokjes
               </span>
               <span className="inline-flex items-center gap-1.5">
+                <span className="inline-flex gap-[2px]">
+                  <span className="block h-2 w-2 rounded-[3px] border border-sky-foreground/40 bg-sky" />
+                  <span className="block h-2 w-2 rounded-[3px] border border-sky-foreground/40 bg-sky" />
+                  <span className="block h-2 w-2 rounded-[3px] border border-sky-foreground/40 bg-sky" />
+                </span>
+                3 ijsblokjes
+              </span>
+              <span className="inline-flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-brand" /> pinda
               </span>
               <span className="inline-flex items-center gap-1.5">
